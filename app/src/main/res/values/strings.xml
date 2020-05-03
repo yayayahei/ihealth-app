@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">iHealthApp</string>
-    <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
+    <string name="create_indicator">添加指标</string>
 </resources>
