@@ -11,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/edit_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -20,8 +20,198 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="#FFFFFF">
-
     </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:id="@+id/indicator_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_toolbar">
+
+        <TextView
+            android:id="@+id/indicator_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:gravity="bottom|start"
+            android:text="@string/indicator_name_label"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="33dp" />
+
+        <EditText
+            android:id="@+id/indicator_name_input"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="bottom|end"
+            android:hint="@string/indicator_name_hint"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="@android:color/darker_gray"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="24dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/indicator_unit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/indicator_name">
+
+        <TextView
+            android:id="@+id/indicator_unit_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:gravity="bottom|start"
+            android:text="@string/indicator_unit_label"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="33dp" />
+
+        <EditText
+            android:id="@+id/indicator_unit_input"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="bottom|end"
+            android:hint="@string/indicator_unit_hint"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="@android:color/darker_gray"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/indicator_min"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/indicator_unit">
+
+        <TextView
+            android:id="@+id/indicator_min_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:gravity="bottom|start"
+            android:text="@string/indicator_min_label"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="33dp" />
+
+        <EditText
+            android:id="@+id/indicator_min_input"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="bottom|end"
+            android:hint="@string/indicator_min_hint"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="@android:color/darker_gray"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/indicator_max"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/indicator_min">
+
+        <TextView
+            android:id="@+id/indicator_max_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:gravity="bottom|start"
+            android:text="@string/indicator_max_label"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="33dp" />
+
+        <EditText
+            android:id="@+id/indicator_max_input"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="bottom|end"
+            android:hint="@string/indicator_max_hint"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="@android:color/darker_gray"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="0dp"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/indicator_tip"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/indicator_max">
+
+        <TextView
+            android:id="@+id/indicator_tip_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|start"
+            android:text="@string/indicator_tip"
+            android:textSize="18sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
