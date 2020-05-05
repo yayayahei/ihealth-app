@@ -16,14 +16,10 @@ class CreateIndicatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_indicator)
-
-
-
-
-        InitializeFields()
+        initializeFields()
     }
 
-    fun InitializeFields() {
+    private fun initializeFields() {
         val toolbar = findViewById<Toolbar>(R.id.edit_toolbar)
         setSupportActionBar(toolbar)
 
