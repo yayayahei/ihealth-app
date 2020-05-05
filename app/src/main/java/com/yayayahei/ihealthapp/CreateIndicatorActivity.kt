@@ -10,8 +10,8 @@ import androidx.appcompat.widget.Toolbar
 
 class CreateIndicatorActivity : AppCompatActivity() {
 
-    lateinit var discard_button: TextView
-    lateinit var save_button: TextView
+    private lateinit var discardButton: TextView
+    private lateinit var saveButton: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +20,10 @@ class CreateIndicatorActivity : AppCompatActivity() {
     }
 
     private fun initializeFields() {
+        initActionBarFields()
+    }
+
+    private fun initActionBarFields() {
         val toolbar = findViewById<Toolbar>(R.id.edit_toolbar)
         setSupportActionBar(toolbar)
 
@@ -29,9 +33,9 @@ class CreateIndicatorActivity : AppCompatActivity() {
         val customAction: View = mInflater.inflate(R.layout.edit_custom_action_bar, null)
         supportActionBar?.customView = customAction
 
-        discard_button = customAction.findViewById(R.id.discard_button)
-        discard_button.setOnClickListener(View.OnClickListener { finish() })
-        save_button = customAction.findViewById(R.id.save_button)
-        save_button.setOnClickListener(View.OnClickListener { finish() })
+        discardButton = customAction.findViewById(R.id.discard_button)
+        discardButton.setOnClickListener(View.OnClickListener { finish() })
+        saveButton = customAction.findViewById(R.id.save_button)
+        saveButton.setOnClickListener(View.OnClickListener { finish() })
     }
 }
