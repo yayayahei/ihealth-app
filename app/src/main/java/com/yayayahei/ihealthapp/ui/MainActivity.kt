@@ -1,9 +1,10 @@
-package com.yayayahei.ihealthapp
+package com.yayayahei.ihealthapp.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.yayayahei.ihealthapp.R
 
 const val EXTRA_MESSAGE = "com.yayayahei.ihealthapp.MESSAGE"
 

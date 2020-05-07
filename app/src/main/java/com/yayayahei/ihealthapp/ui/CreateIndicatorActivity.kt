@@ -1,14 +1,21 @@
-package com.yayayahei.ihealthapp
+package com.yayayahei.ihealthapp.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.yayayahei.ihealthapp.models.*
-
+import com.yayayahei.ihealthapp.Injection
+import com.yayayahei.ihealthapp.R
+import com.yayayahei.ihealthapp.persistence.DEFAULT_INDICATOR_MAX
+import com.yayayahei.ihealthapp.persistence.DEFAULT_INDICATOR_MIN
+import com.yayayahei.ihealthapp.persistence.Indicator
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 class CreateIndicatorActivity : AppCompatActivity() {
 
@@ -19,9 +26,16 @@ class CreateIndicatorActivity : AppCompatActivity() {
     private lateinit var indicatorMinInput: EditText
     private lateinit var indicatorMaxInput: EditText
 
+    private lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel: IndicatorViewModel by viewModels{ viewModelFactory }
+
+    private val disposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_indicator)
+
+        viewModelFactory = Injection.provideViewModelFactory(this)
         initializeFields()
     }
 
@@ -53,14 +67,30 @@ class CreateIndicatorActivity : AppCompatActivity() {
         saveButton.setOnClickListener(View.OnClickListener { createIndicator() })
     }
 
+
     private fun createIndicator() {
-        var indicator = Indicator(
+        val indicator = Indicator(
             indicatorNameInput.text.toString(),
             indicatorUnitInput.text.toString(),
             indicatorMinInput.text.toString().toDoubleOrNull() ?: DEFAULT_INDICATOR_MIN,
             indicatorMaxInput.text.toString().toDoubleOrNull() ?: DEFAULT_INDICATOR_MAX
         )
+
         println(indicator)
-        finish()
+        disposable.add(
+            viewModel
+                .insertIndicator(indicator)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    println("saved")
+//                    println("indicators in db")
+//                    for (indi in viewModel.getAllIndicators()) {
+//                        println(indi)
+//                    }
+                    finish()
+                }, { error -> println(error) })
+        )
+
     }
 }
