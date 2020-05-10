@@ -4,14 +4,64 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.yayayahei.ihealthapp.Injection
 import com.yayayahei.ihealthapp.R
+import com.yayayahei.ihealthapp.persistence.Indicator
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 const val EXTRA_MESSAGE = "com.yayayahei.ihealthapp.MESSAGE"
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var indicatorRecyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel: IndicatorViewModel by viewModels { viewModelFactory }
+
+    private val disposable = CompositeDisposable()
+    private lateinit var indicators: List<Indicator>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModelFactory = Injection.provideViewModelFactory(this)
+
+        getAllIndicators()
+
+    }
+
+    fun renderIndicatorsList() {
+        viewManager = LinearLayoutManager(this)
+        viewAdapter =
+            IndicatorViewAdapter(indicators)
+        indicatorRecyclerView = findViewById<RecyclerView>(R.id.indicator_recycler_view).apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
+    }
+
+    private fun getAllIndicators() {
+        disposable.add(
+            viewModel
+                .getAllIndicators()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    println("got all indicators")
+                    println("indicators in db")
+                    for (indi in it) {
+                        println(indi)
+                    }
+                    indicators = it
+                    renderIndicatorsList()
+                }, { error -> println(error) })
+        )
     }
 
     fun gotoAddIndicatorActivity(view: View) {
