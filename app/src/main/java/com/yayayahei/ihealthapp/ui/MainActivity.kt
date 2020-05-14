@@ -64,6 +64,17 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    fun clearAllIndicators(view: View) {
+        disposable.add(
+            viewModel.deleteAllIndicators()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    println("deleted all indicators")
+                }, { error -> println(error) })
+        )
+    }
+
     fun gotoAddIndicatorActivity(view: View) {
         val intent = Intent(this, CreateIndicatorActivity::class.java)
         startActivity(intent)

@@ -28,13 +28,20 @@
 
             <Button
                 android:id="@+id/button"
-                style="@android:style/Widget.DeviceDefault.Button.Borderless"
+                style="@style/AppTheme.button"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:background="#FFFFFF"
                 android:onClick="gotoAddIndicatorActivity"
                 android:text="@string/create_indicator"
-                android:textColor="#03A9F4" />
+            />
+
+            <Button
+                android:id="@+id/clear_all"
+                style="@style/AppTheme.button.dangerous"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:onClick="clearAllIndicators"
+                android:text="@string/clear_all" />
 
 
         </LinearLayout>
