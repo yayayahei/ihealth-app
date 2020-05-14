@@ -41,7 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:onClick="clearAllIndicators"
-                android:text="@string/clear_all" />
+                android:text="@string/clear_all"
+                />
 
 
         </LinearLayout>
