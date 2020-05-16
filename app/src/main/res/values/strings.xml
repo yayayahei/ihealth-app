@@ -4,7 +4,7 @@
     <string name="discard_label">取消</string>
     <string name="save_label">确定</string>
     <string name="indicator_name_hint">体重</string>
-    <string name="indicator_name_label" >名称</string>
+    <string name="indicator_name_label">名称</string>
     <string name="indicator_unit_label">单位</string>
     <string name="indicator_min_label">最小值</string>
     <string name="indicator_max_label">最大值</string>

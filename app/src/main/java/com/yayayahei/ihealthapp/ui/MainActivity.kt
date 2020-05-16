@@ -14,12 +14,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-const val EXTRA_MESSAGE = "com.yayayahei.ihealthapp.MESSAGE"
+const val INDICATOR_ID = "com.yayayahei.ihealthapp.INDICATOR_ID"
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var indicatorRecyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: IndicatorViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var viewModelFactory: ViewModelFactory
     private val viewModel: IndicatorViewModel by viewModels { viewModelFactory }
@@ -37,12 +37,19 @@ class MainActivity : AppCompatActivity() {
 
     fun renderIndicatorsList() {
         viewManager = LinearLayoutManager(this)
-        viewAdapter =
-            IndicatorViewAdapter(indicators)
+        viewAdapter = IndicatorViewAdapter(indicators)
         indicatorRecyclerView = findViewById<RecyclerView>(R.id.indicator_recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
+        }
+        viewAdapter.onItemClick = { indicator ->
+            run {
+                println("click: " + indicator.iid)
+                val intent = Intent(this, RecordForIndicatorActivity::class.java)
+                intent.putExtra(INDICATOR_ID,indicator.iid)
+                startActivity(intent)
+            }
         }
     }
 
@@ -79,4 +86,5 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, CreateIndicatorActivity::class.java)
         startActivity(intent)
     }
+
 }

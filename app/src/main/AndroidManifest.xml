@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.RecordForIndicatorActivity"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity
             android:name=".ui.CreateIndicatorActivity"
             android:parentActivityName=".ui.MainActivity" />
         <activity android:name=".ui.MainActivity">

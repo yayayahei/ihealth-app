@@ -7,12 +7,23 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.yayayahei.ihealthapp.R
 import com.yayayahei.ihealthapp.persistence.Indicator
+import kotlinx.android.synthetic.main.indicator_item_in_list.view.*
+import org.w3c.dom.Text
 
 class IndicatorViewAdapter(private val indicators: List<Indicator>) :
     RecyclerView.Adapter<IndicatorViewAdapter.IndicatorViewHolder>() {
-    //    class MyViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
-    class IndicatorViewHolder(val indicatorView: ConstraintLayout) :
-        RecyclerView.ViewHolder(indicatorView)
+    var onItemClick: ((Indicator) -> Unit)? = null
+
+    inner class IndicatorViewHolder(val indicatorView: ConstraintLayout) :
+        RecyclerView.ViewHolder(indicatorView) {
+        val indicatorName: TextView = indicatorView.indicatorItemName
+
+        init {
+            indicatorView.setOnClickListener {
+                onItemClick?.invoke(indicators[adapterPosition])
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndicatorViewHolder {
         val indicatorView = LayoutInflater.from(parent.context)
@@ -23,8 +34,6 @@ class IndicatorViewAdapter(private val indicators: List<Indicator>) :
 
     override fun getItemCount() = indicators.count()
     override fun onBindViewHolder(holder: IndicatorViewHolder, position: Int) {
-        val textView = holder.indicatorView.findViewById<TextView>(R.id.indicatorItemName)
-        textView.text = indicators[position].name
+        holder.indicatorName.text = indicators[position].name
     }
-
 }
