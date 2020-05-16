@@ -25,4 +25,12 @@
         <item name="android:paddingEnd">16dp</item>
         <item name="android:layout_marginBottom">3dp</item>
     </style>
+    <style name="AppTheme.listItem.textView" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:background">@color/cardview_light_background</item>
+        <item name="android:gravity">center|start</item>
+<!--        <item name="android:paddingStart">16dp</item>-->
+<!--        <item name="android:paddingEnd">16dp</item>-->
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
 </resources>
