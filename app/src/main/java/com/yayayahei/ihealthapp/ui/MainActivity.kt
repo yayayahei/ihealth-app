@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 const val INDICATOR_ID = "com.yayayahei.ihealthapp.INDICATOR_ID"
+const val INDICATOR_NAME = "com.yayayahei.ihealthapp.INDICATOR_NAME"
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 println("click: " + indicator.iid)
                 val intent = Intent(this, RecordForIndicatorActivity::class.java)
                 intent.putExtra(INDICATOR_ID,indicator.iid)
+                intent.putExtra(INDICATOR_NAME,indicator.name)
                 startActivity(intent)
             }
         }

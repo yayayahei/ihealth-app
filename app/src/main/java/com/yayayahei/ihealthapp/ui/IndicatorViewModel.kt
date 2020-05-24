@@ -14,6 +14,9 @@ class IndicatorViewModel(private val dataSource: IndicatorDao) : ViewModel() {
      fun getAllIndicators(): Observable<List<Indicator>> {
         return dataSource.getAll()
     }
+    fun getAllIndicators(indicatorIds: IntArray): Observable<List<Indicator>> {
+        return dataSource.loadAllByIds(indicatorIds)
+    }
 
     fun deleteAllIndicators(): Completable {
         return dataSource.deleteAll()
