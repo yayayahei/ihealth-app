@@ -19,9 +19,9 @@ import java.util.*
 
 class RecordForIndicatorActivity : AppCompatActivity() {
     private lateinit var indicatorGaugeView: PointerSpeedometer
-    private lateinit var indicatorGaugeDateView:TextView
+    private lateinit var indicatorGaugeDateView: TextView
     private lateinit var viewModelFactory: ViewModelFactory
-    private val viewModel: IndicatorViewModel by viewModels{ viewModelFactory }
+    private val viewModel: IndicatorViewModel by viewModels { viewModelFactory }
 
     private val disposable = CompositeDisposable()
 
@@ -29,44 +29,59 @@ class RecordForIndicatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_for_indicator)
-        val indicatorId = intent.getIntExtra(INDICATOR_ID, 0)
+
         val indicatorName = intent.getStringExtra(INDICATOR_NAME)
-        showAppBar()
-        setActionBarTitle(indicatorName)
-        indicatorGaugeView=findViewById(R.id.indicator_gauge)
-        indicatorGaugeDateView=findViewById<TextView>(R.id.gauge_date)
-        indicatorGaugeView.setStartDegree(180)
-        indicatorGaugeView.setEndDegree(360)
-        indicatorGaugeView.speedometerMode=Speedometer.Mode.TOP
-        indicatorGaugeView.textColor=R.color.colorPrimaryDark
-        indicatorGaugeView.speedTextPosition= Gauge.Position.BOTTOM_CENTER
+        showAppBar(indicatorName)
+
+        findViews()
+        initIndicatorGaugeView()
+
         viewModelFactory = Injection.provideViewModelFactory(this)
+
+        val indicatorId = intent.getIntExtra(INDICATOR_ID, 0)
         getIndicatorById(indicatorId)
     }
-    private fun getIndicatorById(indicatorId: Int){
-        disposable.add(viewModel.getAllIndicators(intArrayOf(indicatorId)).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                gotIndicatorData(it.first())
-            },{error-> println(error)}))
-    }
-    private fun gotIndicatorData(indicator:Indicator){
-        indicatorGaugeView.unit=indicator.unit
-        indicatorGaugeView.minSpeed=indicator.min.toFloat()
-        indicatorGaugeView.maxSpeed=indicator.max.toFloat()
-        indicatorGaugeView.tickNumber=((indicator.max-indicator.min)/10).toInt()+1
-        indicatorGaugeView.speedTo(((indicator.max-indicator.min)/2).toFloat())
-        indicatorGaugeDateView.text=SimpleDateFormat("yyyy-MM-dd",Locale.CHINA).format(Date())
 
-    }
-    private fun setActionBarTitle(indicatorName:String) {
-        supportActionBar?.title = indicatorName
+    private fun findViews() {
+        indicatorGaugeView = findViewById(R.id.indicator_gauge)
+        indicatorGaugeDateView = findViewById(R.id.gauge_date)
     }
 
+    private fun initIndicatorGaugeView() {
+        indicatorGaugeView.setStartDegree(180)
+        indicatorGaugeView.setEndDegree(360)
+        indicatorGaugeView.speedometerMode = Speedometer.Mode.TOP
+        indicatorGaugeView.textColor = R.color.colorPrimaryDark
+        indicatorGaugeView.speedTextPosition = Gauge.Position.BOTTOM_CENTER
+    }
 
-    private fun showAppBar() {
+    private fun getIndicatorById(indicatorId: Int) {
+        disposable.add(
+            viewModel.getAllIndicators(intArrayOf(indicatorId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    initIndicatorGaugeView(it.first())
+                }, { error -> println(error) })
+        )
+    }
+
+    private fun initIndicatorGaugeView(indicator: Indicator) {
+        indicatorGaugeView.unit = indicator.unit
+        indicatorGaugeView.minSpeed = indicator.min.toFloat()
+        indicatorGaugeView.maxSpeed = indicator.max.toFloat()
+        indicatorGaugeView.tickNumber = ((indicator.max - indicator.min) / 10).toInt() + 1
+        indicatorGaugeView.speedTo(
+            ((indicator.max - indicator.min) / 2 + indicator.min).toFloat(),
+            0
+        )
+        indicatorGaugeDateView.text = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(Date())
+    }
+
+    private fun showAppBar(indicatorName: String) {
         val toolbar = findViewById<Toolbar>(R.id.record_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = indicatorName
     }
 }
