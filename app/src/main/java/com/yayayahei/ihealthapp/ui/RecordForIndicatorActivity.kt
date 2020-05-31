@@ -1,6 +1,8 @@
 package com.yayayahei.ihealthapp.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -84,5 +86,9 @@ class RecordForIndicatorActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = indicatorName
+    }
+    fun gotoEditGaugeActivity(view: View) {
+        val intent = Intent(this, EditGaugeActivity::class.java)
+        startActivity(intent)
     }
 }

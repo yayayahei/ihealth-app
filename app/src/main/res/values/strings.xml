@@ -13,4 +13,5 @@
     <string name="indicator_max_hint">100</string>
     <string name="indicator_tip">Tip: 最大最小值将出现在仪表盘上</string>
     <string name="clear_all">清除所有</string>
+    <string name="edit">编辑</string>
 </resources>
