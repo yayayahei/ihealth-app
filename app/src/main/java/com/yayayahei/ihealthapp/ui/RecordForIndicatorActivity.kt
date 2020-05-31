@@ -1,12 +1,12 @@
 package com.yayayahei.ihealthapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.github.anastr.speedviewlib.Gauge
 import com.github.anastr.speedviewlib.PointerSpeedometer
-import com.github.anastr.speedviewlib.SpeedView
 import com.github.anastr.speedviewlib.Speedometer
 import com.yayayahei.ihealthapp.Injection
 import com.yayayahei.ihealthapp.R
@@ -14,9 +14,12 @@ import com.yayayahei.ihealthapp.persistence.Indicator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RecordForIndicatorActivity : AppCompatActivity() {
     private lateinit var indicatorGaugeView: PointerSpeedometer
+    private lateinit var indicatorGaugeDateView:TextView
     private lateinit var viewModelFactory: ViewModelFactory
     private val viewModel: IndicatorViewModel by viewModels{ viewModelFactory }
 
@@ -31,9 +34,10 @@ class RecordForIndicatorActivity : AppCompatActivity() {
         showAppBar()
         setActionBarTitle(indicatorName)
         indicatorGaugeView=findViewById(R.id.indicator_gauge)
+        indicatorGaugeDateView=findViewById<TextView>(R.id.gauge_date)
         indicatorGaugeView.setStartDegree(180)
         indicatorGaugeView.setEndDegree(360)
-//        indicatorGaugeView.speedometerMode=Speedometer.Mode.TOP
+        indicatorGaugeView.speedometerMode=Speedometer.Mode.TOP
         indicatorGaugeView.textColor=R.color.colorPrimaryDark
         indicatorGaugeView.speedTextPosition= Gauge.Position.BOTTOM_CENTER
         viewModelFactory = Injection.provideViewModelFactory(this)
@@ -52,6 +56,8 @@ class RecordForIndicatorActivity : AppCompatActivity() {
         indicatorGaugeView.maxSpeed=indicator.max.toFloat()
         indicatorGaugeView.tickNumber=((indicator.max-indicator.min)/10).toInt()+1
         indicatorGaugeView.speedTo(((indicator.max-indicator.min)/2).toFloat())
+        indicatorGaugeDateView.text=SimpleDateFormat("yyyy-MM-dd",Locale.CHINA).format(Date())
+
     }
     private fun setActionBarTitle(indicatorName:String) {
         supportActionBar?.title = indicatorName

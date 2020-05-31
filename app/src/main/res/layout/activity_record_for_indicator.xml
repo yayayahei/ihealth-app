@@ -30,4 +30,13 @@
         app:sv_withTremble="false"
         app:sv_tickPadding="20dp"/>
 
+    <TextView
+        android:id="@+id/gauge_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/indicator_gauge" />
 </androidx.constraintlayout.widget.ConstraintLayout>
