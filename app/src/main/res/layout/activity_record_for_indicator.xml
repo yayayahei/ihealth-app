@@ -26,9 +26,10 @@
         app:layout_constraintTop_toBottomOf="@id/record_toolbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:sv_indicator="NeedleIndicator"
+        app:sv_indicator="TriangleIndicator"
         app:sv_withTremble="false"
-        app:sv_tickPadding="20dp"/>
+        app:sv_tickPadding="30dp"
+        app:sv_centerCircleRadius="@dimen/cardview_default_radius"/>
 
     <TextView
         android:id="@+id/gauge_date"

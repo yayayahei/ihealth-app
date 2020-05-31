@@ -70,7 +70,8 @@ class RecordForIndicatorActivity : AppCompatActivity() {
         indicatorGaugeView.unit = indicator.unit
         indicatorGaugeView.minSpeed = indicator.min.toFloat()
         indicatorGaugeView.maxSpeed = indicator.max.toFloat()
-        indicatorGaugeView.tickNumber = ((indicator.max - indicator.min) / 10).toInt() + 1
+//        indicatorGaugeView.tickNumber = ((indicator.max - indicator.min) / 10).toInt() + 1
+        indicatorGaugeView.tickNumber = 11
         indicatorGaugeView.speedTo(
             ((indicator.max - indicator.min) / 2 + indicator.min).toFloat(),
             0
