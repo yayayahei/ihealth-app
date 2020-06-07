@@ -30,7 +30,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                 angle = 180
             }
         }
-        println(angle)
+//        println(angle)
         setSpeedAt(getValueAtDegree(angle.toFloat()))
     }
 

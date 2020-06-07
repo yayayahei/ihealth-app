@@ -14,4 +14,6 @@
     <string name="indicator_tip">Tip: 最大最小值将出现在仪表盘上</string>
     <string name="clear_all">清除所有</string>
     <string name="edit">编辑</string>
+    <string name="save">保存</string>
+    <string name="save_succeed">保存成功！</string>
 </resources>

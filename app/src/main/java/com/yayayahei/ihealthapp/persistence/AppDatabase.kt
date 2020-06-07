@@ -6,9 +6,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Indicator::class], version = 1)
+@Database(entities = [Indicator::class,IndicatorRecord::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun indicatorDao(): IndicatorDao
+    abstract fun indicatorRecordDao(): IndicatorRecordDao
 
     companion object {
         @Volatile
@@ -21,6 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "ihealth")
+                .fallbackToDestructiveMigration()
                 .build()
     }
 }
