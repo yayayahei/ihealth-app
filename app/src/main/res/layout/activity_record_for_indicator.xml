@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/black" />
 
-    <com.github.anastr.speedviewlib.PointerSpeedometer
+    <com.yayayahei.ihealthapp.ui.MoveableGaugeView
         android:id="@+id/indicator_gauge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

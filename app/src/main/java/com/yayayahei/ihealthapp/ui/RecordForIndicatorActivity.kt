@@ -2,13 +2,13 @@ package com.yayayahei.ihealthapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.github.anastr.speedviewlib.Gauge
-import com.github.anastr.speedviewlib.PointerSpeedometer
 import com.github.anastr.speedviewlib.Speedometer
 import com.yayayahei.ihealthapp.Injection
 import com.yayayahei.ihealthapp.R
@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class RecordForIndicatorActivity : AppCompatActivity() {
-    private lateinit var indicatorGaugeView: PointerSpeedometer
+    private lateinit var indicatorGaugeView: MoveableGaugeView
     private lateinit var indicatorGaugeDateView: TextView
     private lateinit var viewModelFactory: ViewModelFactory
     private val viewModel: IndicatorViewModel by viewModels { viewModelFactory }
@@ -79,6 +79,7 @@ class RecordForIndicatorActivity : AppCompatActivity() {
             0
         )
         indicatorGaugeDateView.text = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(Date())
+
     }
 
     private fun showAppBar(indicatorName: String) {
@@ -87,6 +88,7 @@ class RecordForIndicatorActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = indicatorName
     }
+
     fun gotoEditGaugeActivity(view: View) {
         val intent = Intent(this, EditGaugeActivity::class.java)
         startActivity(intent)
