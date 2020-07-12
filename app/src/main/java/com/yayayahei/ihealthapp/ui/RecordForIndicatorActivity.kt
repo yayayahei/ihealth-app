@@ -67,31 +67,31 @@ class RecordForIndicatorActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     indicator = it.first()
-                    initIndicatorGaugeView(it.first())
+                    initIndicatorGaugeView(indicator)
                 }, { error -> println(error) })
 
-            )
+        )
     }
 
     private fun refreshIndicatorGaugeView() {
         if (indicatorRecord != null) {
+            println("refresh indicator gauge view by today's latest record: $indicatorRecord")
             indicatorGaugeView.speedTo(indicatorRecord!!.value.toFloat(), 0)
-        } else {
-            indicatorGaugeView.speedTo(
-                ((indicator.max - indicator.min) / 2 + indicator.min).toFloat(),
-                0
-            )
         }
     }
 
-    private fun initIndicatorGaugeView(
-        indicator: Indicator
-    ) {
+    private fun initIndicatorGaugeView(indicator: Indicator) {
+        println("got indicator:\n$indicator")
         indicatorGaugeView.unit = indicator.unit
         indicatorGaugeView.minSpeed = indicator.min.toFloat()
         indicatorGaugeView.maxSpeed = indicator.max.toFloat()
 //        indicatorGaugeView.tickNumber = ((indicator.max - indicator.min) / 10).toInt() + 1
         indicatorGaugeView.tickNumber = 11
+        indicatorGaugeView.speedTo(
+            ((indicator.max - indicator.min) / 2 + indicator.min).toFloat(),
+            0
+        )
+
         disposable.add(
             indicatorRecordViewModel.getLastRecordOfToday(indicator.iid)
                 .subscribeOn(Schedulers.io())
