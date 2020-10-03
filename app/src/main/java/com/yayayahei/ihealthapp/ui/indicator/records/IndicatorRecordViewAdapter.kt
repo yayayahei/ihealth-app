@@ -15,7 +15,12 @@ class IndicatorRecordViewAdapter(private val indicatorRecords: List<IndicatorRec
 
     inner class IndicatorRecordViewHolder(val indicatorRecordView: ConstraintLayout) :
         RecyclerView.ViewHolder(indicatorRecordView) {
-        val indicatorName: TextView = indicatorRecordView.indicatorRecordItemName
+        private val indicatorName: TextView = indicatorRecordView.indicatorRecordItemName
+
+        fun setIndicatorRecord(indicatorRecord: IndicatorRecord) {
+            indicatorName.text =
+                indicatorRecord.createTime.toString() + ": " + indicatorRecord.value
+        }
 
         init {
             indicatorRecordView.setOnClickListener {
@@ -27,13 +32,11 @@ class IndicatorRecordViewAdapter(private val indicatorRecords: List<IndicatorRec
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndicatorRecordViewHolder {
         val indicatorRecordView = LayoutInflater.from(parent.context)
             .inflate(R.layout.indicator_record_item_in_list, parent, false) as ConstraintLayout
-
         return IndicatorRecordViewHolder(indicatorRecordView)
     }
 
     override fun getItemCount() = indicatorRecords.count()
     override fun onBindViewHolder(holderRecord: IndicatorRecordViewHolder, position: Int) {
-        holderRecord.indicatorName.text =
-            indicatorRecords[position].createTime.toString() + ": " + indicatorRecords[position].value
+        holderRecord.setIndicatorRecord(indicatorRecords[position])
     }
 }
