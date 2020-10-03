@@ -16,4 +16,5 @@
     <string name="edit">编辑</string>
     <string name="save">保存</string>
     <string name="save_succeed">保存成功！</string>
+    <string name="history">History</string>
 </resources>

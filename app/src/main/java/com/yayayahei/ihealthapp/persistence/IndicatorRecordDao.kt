@@ -20,6 +20,16 @@ interface IndicatorRecordDao {
     @Query("select * from indicator_record where parent_indicator_id=:indicatorId  and create_time>:today order by create_time desc  limit 1")
     fun getLastRecordOfToday(
         indicatorId: Int,
-        today: Long? = SimpleDateFormat("yyyy-MM-dd").parse(SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(Date()), ParsePosition(0)).time
+        today: Long? = SimpleDateFormat("yyyy-MM-dd").parse(
+            SimpleDateFormat(
+                "yyyy-MM-dd",
+                Locale.CHINA
+            ).format(Date()), ParsePosition(0)
+        ).time
     ): Observable<IndicatorRecord?>
+
+
+    @Query("select * from indicator_record where parent_indicator_id=:indicatorId  order by create_time desc")
+    fun getRecords(indicatorId: Int): Observable<List<IndicatorRecord>>
+
 }

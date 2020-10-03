@@ -2,19 +2,21 @@ package com.yayayahei.ihealthapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.anastr.speedviewlib.Gauge
 import com.github.anastr.speedviewlib.Speedometer
 import com.yayayahei.ihealthapp.Injection
 import com.yayayahei.ihealthapp.R
 import com.yayayahei.ihealthapp.persistence.Indicator
 import com.yayayahei.ihealthapp.persistence.IndicatorRecord
+import com.yayayahei.ihealthapp.ui.indicator.records.IndicatorRecordViewAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -31,6 +33,10 @@ class RecordForIndicatorActivity : AppCompatActivity() {
 
     private lateinit var indicator: Indicator
     private var indicatorRecord: IndicatorRecord? = null
+
+    private lateinit var indicatorRecordRecyclerView: RecyclerView
+    private lateinit var indicatorRecordListViewManager: RecyclerView.LayoutManager
+    private lateinit var indicatorRecordViewAdapter: IndicatorRecordViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_for_indicator)
@@ -68,6 +74,7 @@ class RecordForIndicatorActivity : AppCompatActivity() {
                 .subscribe({
                     indicator = it.first()
                     initIndicatorGaugeView(indicator)
+                    renderIndicatorRecordList(indicator)
                 }, { error -> println(error) })
 
         )
@@ -140,5 +147,29 @@ class RecordForIndicatorActivity : AppCompatActivity() {
                     toast.show()
                 }, { error -> println(error) })
         )
+    }
+
+    fun renderIndicatorRecordList(indicator: Indicator) {
+        disposable.add(
+            indicatorRecordViewModel.getRecords(indicator.iid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    indicatorRecordListViewManager = LinearLayoutManager(this)
+                    indicatorRecordViewAdapter = IndicatorRecordViewAdapter(it)
+                    indicatorRecordRecyclerView =
+                        findViewById<RecyclerView>(R.id.indicator_records_recycler_view).apply {
+                            setHasFixedSize(true)
+                            layoutManager = indicatorRecordListViewManager
+                            adapter = indicatorRecordViewAdapter
+                        }
+                    indicatorRecordViewAdapter.onItemClick = { indicatorRecord ->
+                        run {
+                            println("click: " + indicatorRecord.irid)
+                        }
+                    }
+                }, { error -> println(error) })
+        )
+
     }
 }

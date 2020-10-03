@@ -14,4 +14,8 @@ class IndicatorRecordViewModel(private val dataSource: IndicatorRecordDao) : Vie
     fun getLastRecordOfToday(indicatorId: Int): Observable<IndicatorRecord?> {
         return dataSource.getLastRecordOfToday(indicatorId)
     }
+
+    fun getRecords(indicatorId:Int):Observable<List<IndicatorRecord>>{
+        return dataSource.getRecords(indicatorId)
+    }
 }
