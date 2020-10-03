@@ -1,4 +1,4 @@
-package com.yayayahei.ihealthapp.persistence
+package com.yayayahei.ihealthapp.persistence.indicator
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -21,10 +21,12 @@ data class Indicator(
 
     init {
         if (name.isEmpty()) {
-            name = DEFAULT_INDICATOR_NAME
+            name =
+                DEFAULT_INDICATOR_NAME
         }
         if (unit.isEmpty()) {
-            unit = DEFAULT_INDICATOR_UNIT
+            unit =
+                DEFAULT_INDICATOR_UNIT
         }
     }
 

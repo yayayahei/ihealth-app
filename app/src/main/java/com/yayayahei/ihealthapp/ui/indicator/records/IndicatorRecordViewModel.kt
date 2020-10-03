@@ -1,8 +1,8 @@
-package com.yayayahei.ihealthapp.ui
+package com.yayayahei.ihealthapp.ui.indicator.records
 
 import androidx.lifecycle.ViewModel
-import com.yayayahei.ihealthapp.persistence.IndicatorRecord
-import com.yayayahei.ihealthapp.persistence.IndicatorRecordDao
+import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecord
+import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecordDao
 import io.reactivex.Completable
 import io.reactivex.Observable
 

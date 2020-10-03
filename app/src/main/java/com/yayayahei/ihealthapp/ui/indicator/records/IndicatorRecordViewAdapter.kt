@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.yayayahei.ihealthapp.R
-import com.yayayahei.ihealthapp.persistence.IndicatorRecord
+import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecord
 import kotlinx.android.synthetic.main.indicator_record_item_in_list.view.*
 
 class IndicatorRecordViewAdapter(private val indicatorRecords: List<IndicatorRecord>) :

@@ -1,15 +1,14 @@
-package com.yayayahei.ihealthapp.persistence
+package com.yayayahei.ihealthapp.persistence.indicator.records
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecord
 import io.reactivex.Completable
 import io.reactivex.Observable
 import java.text.ParsePosition
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.temporal.TemporalField
 import java.util.*
 
 @Dao

@@ -1,6 +1,7 @@
-package com.yayayahei.ihealthapp.persistence
+package com.yayayahei.ihealthapp.persistence.indicator
 
 import androidx.room.*
+import com.yayayahei.ihealthapp.persistence.indicator.Indicator
 import io.reactivex.Completable
 import io.reactivex.Observable
 

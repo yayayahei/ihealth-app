@@ -1,4 +1,4 @@
-package com.yayayahei.ihealthapp.ui
+package com.yayayahei.ihealthapp.ui.indicator.records
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,9 +14,13 @@ import com.github.anastr.speedviewlib.Gauge
 import com.github.anastr.speedviewlib.Speedometer
 import com.yayayahei.ihealthapp.Injection
 import com.yayayahei.ihealthapp.R
-import com.yayayahei.ihealthapp.persistence.Indicator
-import com.yayayahei.ihealthapp.persistence.IndicatorRecord
-import com.yayayahei.ihealthapp.ui.indicator.records.IndicatorRecordViewAdapter
+import com.yayayahei.ihealthapp.persistence.indicator.Indicator
+import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecord
+import com.yayayahei.ihealthapp.ui.EditGaugeActivity
+import com.yayayahei.ihealthapp.ui.ViewModelFactory
+import com.yayayahei.ihealthapp.ui.indicator.INDICATOR_ID
+import com.yayayahei.ihealthapp.ui.indicator.INDICATOR_NAME
+import com.yayayahei.ihealthapp.ui.indicator.IndicatorViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -127,7 +131,11 @@ class RecordForIndicatorActivity : AppCompatActivity() {
 
     fun saveIndicator(view: View) {
         val indicatorRecord =
-            IndicatorRecord(indicator.iid, indicatorGaugeView.speed.toDouble(), Date())
+            IndicatorRecord(
+                indicator.iid,
+                indicatorGaugeView.speed.toDouble(),
+                Date()
+            )
         println(indicator)
         println(indicatorRecord)
         disposable.add(

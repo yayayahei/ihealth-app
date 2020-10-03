@@ -1,12 +1,15 @@
 package com.yayayahei.ihealthapp.persistence
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.yayayahei.ihealthapp.persistence.indicator.Indicator
+import com.yayayahei.ihealthapp.persistence.indicator.IndicatorDao
+import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecord
+import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecordDao
 
-@Database(entities = [Indicator::class,IndicatorRecord::class], version = 2)
+@Database(entities = [Indicator::class, IndicatorRecord::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun indicatorDao(): IndicatorDao
     abstract fun indicatorRecordDao(): IndicatorRecordDao

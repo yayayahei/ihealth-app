@@ -1,6 +1,8 @@
-package com.yayayahei.ihealthapp.persistence
+package com.yayayahei.ihealthapp.persistence.indicator.records
 
 import androidx.room.*
+import com.yayayahei.ihealthapp.persistence.DateConverter
+import com.yayayahei.ihealthapp.persistence.indicator.Indicator
 import java.util.*
 
 @Entity(

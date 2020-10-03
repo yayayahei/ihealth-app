@@ -1,4 +1,4 @@
-package com.yayayahei.ihealthapp.ui
+package com.yayayahei.ihealthapp.ui.indicator
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.yayayahei.ihealthapp.Injection
 import com.yayayahei.ihealthapp.R
-import com.yayayahei.ihealthapp.persistence.DEFAULT_INDICATOR_MAX
-import com.yayayahei.ihealthapp.persistence.DEFAULT_INDICATOR_MIN
-import com.yayayahei.ihealthapp.persistence.Indicator
+import com.yayayahei.ihealthapp.persistence.indicator.DEFAULT_INDICATOR_MAX
+import com.yayayahei.ihealthapp.persistence.indicator.DEFAULT_INDICATOR_MIN
+import com.yayayahei.ihealthapp.persistence.indicator.Indicator
+import com.yayayahei.ihealthapp.ui.ViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -72,8 +73,10 @@ class CreateIndicatorActivity : AppCompatActivity() {
         val indicator = Indicator(
             indicatorNameInput.text.toString(),
             indicatorUnitInput.text.toString(),
-            indicatorMinInput.text.toString().toDoubleOrNull() ?: DEFAULT_INDICATOR_MIN,
-            indicatorMaxInput.text.toString().toDoubleOrNull() ?: DEFAULT_INDICATOR_MAX
+            indicatorMinInput.text.toString().toDoubleOrNull()
+                ?: DEFAULT_INDICATOR_MIN,
+            indicatorMaxInput.text.toString().toDoubleOrNull()
+                ?: DEFAULT_INDICATOR_MAX
         )
 
         println(indicator)

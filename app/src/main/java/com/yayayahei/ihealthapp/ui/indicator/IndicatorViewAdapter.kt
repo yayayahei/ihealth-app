@@ -1,4 +1,4 @@
-package com.yayayahei.ihealthapp.ui
+package com.yayayahei.ihealthapp.ui.indicator
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.yayayahei.ihealthapp.R
-import com.yayayahei.ihealthapp.persistence.Indicator
+import com.yayayahei.ihealthapp.persistence.indicator.Indicator
 import kotlinx.android.synthetic.main.indicator_item_in_list.view.*
-import org.w3c.dom.Text
 
 class IndicatorViewAdapter(private val indicators: List<Indicator>) :
     RecyclerView.Adapter<IndicatorViewAdapter.IndicatorViewHolder>() {

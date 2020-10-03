@@ -1,4 +1,4 @@
-package com.yayayahei.ihealthapp.ui
+package com.yayayahei.ihealthapp.ui.indicator.records
 
 import android.content.Context
 import android.util.AttributeSet

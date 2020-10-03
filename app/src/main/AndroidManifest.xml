@@ -11,14 +11,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.EditGaugeActivity"
-            android:parentActivityName=".ui.RecordForIndicatorActivity" />
+            android:parentActivityName=".ui.indicator.records.RecordForIndicatorActivity" />
         <activity
-            android:name=".ui.RecordForIndicatorActivity"
-            android:parentActivityName=".ui.MainActivity" />
+            android:name=".ui.indicator.records.RecordForIndicatorActivity"
+            android:parentActivityName=".ui.indicator.MainActivity" />
         <activity
-            android:name=".ui.CreateIndicatorActivity"
-            android:parentActivityName=".ui.MainActivity" />
-        <activity android:name=".ui.MainActivity">
+            android:name=".ui.indicator.CreateIndicatorActivity"
+            android:parentActivityName=".ui.indicator.MainActivity" />
+        <activity android:name=".ui.indicator.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

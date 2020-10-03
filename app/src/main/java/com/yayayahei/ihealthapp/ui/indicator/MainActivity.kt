@@ -1,4 +1,4 @@
-package com.yayayahei.ihealthapp.ui
+package com.yayayahei.ihealthapp.ui.indicator
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yayayahei.ihealthapp.Injection
 import com.yayayahei.ihealthapp.R
-import com.yayayahei.ihealthapp.persistence.Indicator
+import com.yayayahei.ihealthapp.persistence.indicator.Indicator
+import com.yayayahei.ihealthapp.ui.*
+import com.yayayahei.ihealthapp.ui.indicator.records.RecordForIndicatorActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -38,7 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     fun renderIndicatorsList() {
         viewManager = LinearLayoutManager(this)
-        viewAdapter = IndicatorViewAdapter(indicators)
+        viewAdapter =
+            IndicatorViewAdapter(indicators)
         indicatorRecyclerView = findViewById<RecyclerView>(R.id.indicator_recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
