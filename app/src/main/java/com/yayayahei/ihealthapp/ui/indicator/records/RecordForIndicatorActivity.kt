@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.anastr.speedviewlib.Gauge
@@ -37,7 +38,7 @@ class RecordForIndicatorActivity : AppCompatActivity() {
 
     private lateinit var indicator: Indicator
     private var indicatorRecord: IndicatorRecord? = null
-
+    private var toast: Toast? = null
     private lateinit var indicatorRecordRecyclerView: RecyclerView
     private lateinit var indicatorRecordListViewManager: RecyclerView.LayoutManager
     private lateinit var indicatorRecordViewAdapter: IndicatorRecordViewAdapter
@@ -151,10 +152,57 @@ class RecordForIndicatorActivity : AppCompatActivity() {
 //                    }
                     val text =
                         "${indicatorRecord.value}${indicator.unit} ${getString(R.string.save_succeed)}"
-                    val toast = Toast.makeText(applicationContext, text, Toast.LENGTH_LONG)
-                    toast.show()
+                    toast(text)
                 }, { error -> println(error) })
         )
+    }
+
+    private fun toast(text: String) {
+        toast?.cancel()
+        toast = Toast.makeText(applicationContext, text, Toast.LENGTH_LONG)
+        toast?.show()
+    }
+
+    private fun deleteButton(position: Int): SwipeHelper.UnderlayButton {
+        return SwipeHelper.UnderlayButton(
+            this,
+            "删除",
+            14.0f,
+            android.R.color.holo_red_light,
+            object : SwipeHelper.UnderlayButtonClickListener {
+                override fun onClick() {
+                    toast("Deleted item $position")
+                }
+            })
+    }
+
+    fun updateIndicatorRecordViewAdapter(indicatorRecords: List<IndicatorRecord>) {
+        indicatorRecordViewAdapter = IndicatorRecordViewAdapter(indicatorRecords)
+        indicatorRecordViewAdapter.onItemClick = { indicatorRecord ->
+            run {
+                println("click: " + indicatorRecord.irid)
+            }
+        }
+    }
+
+    fun updateIndicatorRecordRecyclerView() {
+        indicatorRecordRecyclerView =
+            findViewById<RecyclerView>(R.id.indicator_records_recycler_view).apply {
+                setHasFixedSize(true)
+                layoutManager = indicatorRecordListViewManager
+                adapter = indicatorRecordViewAdapter
+            }
+        val itemTouchHelper =
+            ItemTouchHelper(object : SwipeHelper(indicatorRecordRecyclerView) {
+                override fun instantiateUnderlayButton(position: Int): List<UnderlayButton> {
+                    var buttons = listOf<UnderlayButton>()
+                    val deleteButton = deleteButton(position)
+                    buttons = listOf(deleteButton)
+                    return buttons
+                }
+            })
+
+        itemTouchHelper.attachToRecyclerView(indicatorRecordRecyclerView)
     }
 
     fun renderIndicatorRecordList(indicator: Indicator) {
@@ -164,20 +212,14 @@ class RecordForIndicatorActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     indicatorRecordListViewManager = LinearLayoutManager(this)
-                    indicatorRecordViewAdapter = IndicatorRecordViewAdapter(it)
-                    indicatorRecordRecyclerView =
-                        findViewById<RecyclerView>(R.id.indicator_records_recycler_view).apply {
-                            setHasFixedSize(true)
-                            layoutManager = indicatorRecordListViewManager
-                            adapter = indicatorRecordViewAdapter
-                        }
-                    indicatorRecordViewAdapter.onItemClick = { indicatorRecord ->
-                        run {
-                            println("click: " + indicatorRecord.irid)
-                        }
-                    }
+                    updateIndicatorRecordViewAdapter(it)
+                    updateIndicatorRecordRecyclerView()
+
+
                 }, { error -> println(error) })
         )
 
     }
+
+
 }
