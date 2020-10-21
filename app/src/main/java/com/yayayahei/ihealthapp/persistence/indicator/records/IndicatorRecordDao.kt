@@ -1,9 +1,6 @@
 package com.yayayahei.ihealthapp.persistence.indicator.records
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.yayayahei.ihealthapp.persistence.indicator.records.IndicatorRecord
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -31,4 +28,6 @@ interface IndicatorRecordDao {
     @Query("select * from indicator_record where parent_indicator_id=:indicatorId  order by create_time desc")
     fun getRecords(indicatorId: Int): Observable<List<IndicatorRecord>>
 
+    @Delete
+    fun deleteIndicatorRecord(indicatorRecord: IndicatorRecord): Completable
 }

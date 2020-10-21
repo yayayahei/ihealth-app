@@ -171,7 +171,18 @@ class RecordForIndicatorActivity : AppCompatActivity() {
             android.R.color.holo_red_light,
             object : SwipeHelper.UnderlayButtonClickListener {
                 override fun onClick() {
-                    toast("Deleted item $position")
+                    toast("click position ${position}")
+                    val indicatorRecordOnPosition = indicatorRecordViewAdapter.getIndicatorRecord(position)
+
+                    disposable.add(
+                        indicatorRecordViewModel.deleteIndicatorRecord(indicatorRecordOnPosition)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe {
+                                toast("Deleted item ${indicatorRecordOnPosition.toShortDescription()}")
+                            }
+
+                    )
                 }
             })
     }
@@ -195,10 +206,7 @@ class RecordForIndicatorActivity : AppCompatActivity() {
         val itemTouchHelper =
             ItemTouchHelper(object : SwipeHelper(indicatorRecordRecyclerView) {
                 override fun instantiateUnderlayButton(position: Int): List<UnderlayButton> {
-                    var buttons = listOf<UnderlayButton>()
-                    val deleteButton = deleteButton(position)
-                    buttons = listOf(deleteButton)
-                    return buttons
+                    return listOf( deleteButton(position))
                 }
             })
 

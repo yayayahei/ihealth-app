@@ -18,4 +18,7 @@ class IndicatorRecordViewModel(private val dataSource: IndicatorRecordDao) : Vie
     fun getRecords(indicatorId:Int):Observable<List<IndicatorRecord>>{
         return dataSource.getRecords(indicatorId)
     }
+    fun deleteIndicatorRecord(indicatorRecord: IndicatorRecord):Completable{
+        return dataSource.deleteIndicatorRecord(indicatorRecord)
+    }
 }

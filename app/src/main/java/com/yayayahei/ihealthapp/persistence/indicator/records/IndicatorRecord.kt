@@ -33,4 +33,8 @@ class IndicatorRecord(
                 "update_time: $updateTime\n"
     }
 
+    fun toShortDescription(): String {
+        return "$createTime : $value"
+    }
+
 }

@@ -39,4 +39,7 @@ class IndicatorRecordViewAdapter(private val indicatorRecords: List<IndicatorRec
     override fun onBindViewHolder(holderRecord: IndicatorRecordViewHolder, position: Int) {
         holderRecord.setIndicatorRecord(indicatorRecords[position])
     }
+    fun getIndicatorRecord(position: Int): IndicatorRecord {
+        return indicatorRecords[position]
+    }
 }
